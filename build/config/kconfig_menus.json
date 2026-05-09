@@ -5470,8 +5470,8 @@
                 "children": [],
                 "depends_on": null,
                 "help": "UART communication port number for the example.\nSee UART documentation for available port numbers.",
-                "id": "EXAMPLE_UART_PORT_NUM",
-                "name": "EXAMPLE_UART_PORT_NUM",
+                "id": "UART_PORT_NUM",
+                "name": "UART_PORT_NUM",
                 "range": [
                     0,
                     1
@@ -5482,22 +5482,9 @@
             {
                 "children": [],
                 "depends_on": null,
-                "help": "UART communication speed for Modbus example.",
-                "id": "EXAMPLE_UART_BAUD_RATE",
-                "name": "EXAMPLE_UART_BAUD_RATE",
-                "range": [
-                    1200,
-                    115200
-                ],
-                "title": "UART communication speed",
-                "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": null,
                 "help": "GPIO number for UART RX pin. See UART documentation for more information\nabout available pin numbers for UART.",
-                "id": "EXAMPLE_UART_RXD",
-                "name": "EXAMPLE_UART_RXD",
+                "id": "UART_RXD",
+                "name": "UART_RXD",
                 "range": [
                     0,
                     19
@@ -5509,32 +5496,19 @@
                 "children": [],
                 "depends_on": null,
                 "help": "GPIO number for UART TX pin. See UART documentation for more information\nabout available pin numbers for UART.",
-                "id": "EXAMPLE_UART_TXD",
-                "name": "EXAMPLE_UART_TXD",
+                "id": "UART_TXD",
+                "name": "UART_TXD",
                 "range": [
                     0,
                     19
                 ],
                 "title": "UART TXD pin number",
                 "type": "int"
-            },
-            {
-                "children": [],
-                "depends_on": null,
-                "help": "Defines stack size for UART echo example. Insufficient stack size can cause crash.",
-                "id": "EXAMPLE_TASK_STACK_SIZE",
-                "name": "EXAMPLE_TASK_STACK_SIZE",
-                "range": [
-                    1024,
-                    16384
-                ],
-                "title": "UART echo example task stack size",
-                "type": "int"
             }
         ],
         "depends_on": null,
-        "id": "echo-example-configuration",
-        "title": "Echo Example Configuration",
+        "id": "bm13xx_sim-configuration",
+        "title": "BM13XX_sim Configuration",
         "type": "menu"
     },
     {

@@ -14,12 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//No help, variable specified on the command line.
-CCACHE_ENABLE:UNINITIALIZED=1
-
-//Path to a program.
-CCACHE_FOUND:FILEPATH=/usr/bin/ccache
-
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/home/acnz/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-addr2line
 
@@ -353,13 +347,7 @@ Mbed TLS_IS_TOP_LEVEL:STATIC=OFF
 Mbed TLS_SOURCE_DIR:STATIC=/home/acnz/esp/v5.4/esp-idf/components/mbedtls/mbedtls
 
 //No help, variable specified on the command line.
-PYTHON:UNINITIALIZED=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3
-
-//No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1
-
-//No help, variable specified on the command line.
-SDKCONFIG:UNINITIALIZED=/home/acnz/BM13XX_sim/sdkconfig
 
 //Allow unsafe builds. These builds ARE NOT SECURE.
 UNSAFE_BUILD:BOOL=OFF
@@ -599,7 +587,7 @@ C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS:INTERNAL=1
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.43.0()]
 //Details about finding Python3
-FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3][cfound components: Interpreter ][v3.12.3()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python][cfound components: Interpreter ][v3.12.3()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
@@ -610,10 +598,10 @@ _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 _Python3_Compiler_REASON_FAILURE:INTERNAL=
 //Development reason failure
 _Python3_Development_REASON_FAILURE:INTERNAL=
-_Python3_EXECUTABLE:INTERNAL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3
+_Python3_EXECUTABLE:INTERNAL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;3;32;64;;;abi3;/usr/lib/python3.12;/home/acnz/.espressif/python_env/idf5.4_py3.12_env/lib/python3.12;/home/acnz/.espressif/python_env/idf5.4_py3.12_env/lib/python3.12/site-packages;/home/acnz/.espressif/python_env/idf5.4_py3.12_env/lib/python3.12/site-packages
-_Python3_INTERPRETER_SIGNATURE:INTERNAL=375dbc9a3bd6ab7bd82383c7ef7bcec6
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=eafd81e79386a12561d4a7c9419ff9aa
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
 
