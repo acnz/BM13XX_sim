@@ -254,7 +254,7 @@ IGNORE_EXTRA_COMPONENT:UNINITIALIZED=
 PROJECT_SOURCE_DIR:UNINITIALIZED=/home/acnz/BM13XX_sim
 
 //No help, variable specified on the command line.
-PYTHON:UNINITIALIZED=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python
+PYTHON:UNINITIALIZED=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3
 
 //No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1
