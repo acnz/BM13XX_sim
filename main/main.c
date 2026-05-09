@@ -12,7 +12,7 @@
 #define SIM_UART_PORT CONFIG_UART_PORT_NUM
 #define BUF_SIZE 1024
 
-static const char *TAG = "ASIC_MUSCULO";
+static const char *TAG = "BM13XX_sim_single";
 
 // ============================================================================
 // NÚCLEO SHA-256 EXTREMO (BAKING + EARLY EXIT DO NERDMINER V2)
