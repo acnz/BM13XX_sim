@@ -7,6 +7,7 @@
 #include "driver/uart.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
+#include "mbedtls/sha256.h"
 
 #define SIM_TXD_PIN CONFIG_UART_TXD
 #define SIM_RXD_PIN CONFIG_UART_RXD

@@ -6,7 +6,7 @@
     "interface/ftdi/esp32_devkitj_v1.cfg",
     "target/esp32.cfg"
   ],
-  "idf.port": "/dev/ttyUSB2",
+  "idf.port": "/dev/ttyUSB1",
   "idf.flashType": "UART",
   "idf.currentSetup": "/home/acnz/esp/v5.4/esp-idf",
   "idf.customExtraVars": {
