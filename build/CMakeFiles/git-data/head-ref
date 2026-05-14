@@ -1,9 +1,1 @@
-0000000000000000000000000000000000000000 a1f992412992aae40dd41b52197bc0dd87cb9ef7 acnz <andre.crescenzo@gmail.com> 1777830124 -0300	clone: from https://github.com/acnz/BM13XX_sim.git
-a1f992412992aae40dd41b52197bc0dd87cb9ef7 5470456bede40126dda9e7edee9fabff87d65893 acnz <andre.crescenzo@gmail.com> 1778295097 -0300	commit: pre nerd miner
-5470456bede40126dda9e7edee9fabff87d65893 90acd1e69651cfa782ea42d2bbd3e68fd3a6f134 acnz <andre.crescenzo@gmail.com> 1778295596 -0300	commit: nerdminer style
-90acd1e69651cfa782ea42d2bbd3e68fd3a6f134 24b7fb8bfbcbea7d865e933e7be21cfba9c4f4e2 acnz <andre.crescenzo@gmail.com> 1778299961 -0300	commit: com dashborard no microstrarum
-24b7fb8bfbcbea7d865e933e7be21cfba9c4f4e2 2196d7dcd87ee0918caae801e9870bbe92b8d68a acnz <andre.crescenzo@gmail.com> 1778358764 -0300	commit: baked style 40k (C3-Single)
-2196d7dcd87ee0918caae801e9870bbe92b8d68a 862970b51116ff19986c923af7f4c0cde0f5db67 acnz <andre.crescenzo@gmail.com> 1778364945 -0300	commit: pre C3 S3 swap
-862970b51116ff19986c923af7f4c0cde0f5db67 0519a4de90987bc420be9ef8f23872b0a141e2ca acnz <andre.crescenzo@gmail.com> 1778369049 -0300	commit: dual s3
-0519a4de90987bc420be9ef8f23872b0a141e2ca fc8b5d3d8bddf1276cd601438d92d7e117396f34 acnz <andre.crescenzo@gmail.com> 1778423106 -0300	commit: pre spark miner
-fc8b5d3d8bddf1276cd601438d92d7e117396f34 176bca3eb3802af93e755b01ab59d8c844dfeca6 acnz <andre.crescenzo@gmail.com> 1778554572 -0300	commit: sparkminer fail
+cf50b35802556b489fa771f7d197c6fe820c860f

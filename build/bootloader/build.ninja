@@ -186,7 +186,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Custom command for CMakeFiles/menuconfig
 
 build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.4.0 --dont-write-deprecated --output config /home/acnz/BM13XX_sim/sdkconfig && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/tools/check_term.py && /usr/bin/cmake -E env COMPONENT_KCONFIGS_SOURCE_FILE=/home/acnz/BM13XX_sim/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=/home/acnz/BM13XX_sim/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=/home/acnz/BM13XX_sim/sdkconfig IDF_TARGET=esp32 IDF_TOOLCHAIN=gcc IDF_ENV_FPGA= IDF_INIT_VERSION=5.4.0 /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 -m menuconfig /home/acnz/esp/v5.4/esp-idf/Kconfig && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.4.0 --output config /home/acnz/BM13XX_sim/sdkconfig
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.4.0 --dont-write-deprecated --output config /home/acnz/BM13XX_sim/sdkconfig && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/tools/check_term.py && /usr/bin/cmake -E env COMPONENT_KCONFIGS_SOURCE_FILE=/home/acnz/BM13XX_sim/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=/home/acnz/BM13XX_sim/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=/home/acnz/BM13XX_sim/sdkconfig IDF_TARGET=esp32 IDF_TOOLCHAIN=gcc IDF_ENV_FPGA= IDF_INIT_VERSION=5.4.0 /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python -m menuconfig /home/acnz/esp/v5.4/esp-idf/Kconfig && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.4.0 --output config /home/acnz/BM13XX_sim/sdkconfig
   pool = console
 
 
@@ -194,7 +194,7 @@ build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTO
 # Custom command for CMakeFiles/confserver
 
 build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 -m kconfserver --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python -m kconfserver --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig
   pool = console
 
 
@@ -202,7 +202,7 @@ build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTO
 # Custom command for CMakeFiles/save-defconfig
 
 build CMakeFiles/save-defconfig | ${cmake_ninja_workdir}CMakeFiles/save-defconfig: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --dont-write-deprecated --output savedefconfig /home/acnz/esp/v5.4/esp-idf/components/bootloader/subproject/sdkconfig.defaults
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python -m kconfgen --list-separator=semicolon --kconfig /home/acnz/esp/v5.4/esp-idf/Kconfig --sdkconfig-rename /home/acnz/esp/v5.4/esp-idf/sdkconfig.rename --config /home/acnz/BM13XX_sim/sdkconfig --env-file /home/acnz/BM13XX_sim/build/bootloader/config.env --dont-write-deprecated --output savedefconfig /home/acnz/esp/v5.4/esp-idf/components/bootloader/subproject/sdkconfig.defaults
   pool = console
 
 
@@ -216,7 +216,7 @@ build CMakeFiles/gen_project_binary | ${cmake_ninja_workdir}CMakeFiles/gen_proje
 # Custom command for .bin_timestamp
 
 build .bin_timestamp | ${cmake_ninja_workdir}.bin_timestamp: CUSTOM_COMMAND bootloader.elf || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 elf2image --flash_mode dio --flash_freq 40m --flash_size 2MB --min-rev-full 0 --max-rev-full 399 -o /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin /home/acnz/BM13XX_sim/build/bootloader/bootloader.elf && /usr/bin/cmake -E echo "Generated /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin" && /usr/bin/cmake -E md5sum /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin > /home/acnz/BM13XX_sim/build/bootloader/.bin_timestamp
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 elf2image --flash_mode dio --flash_freq 40m --flash_size 2MB --min-rev-full 0 --max-rev-full 399 -o /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin /home/acnz/BM13XX_sim/build/bootloader/bootloader.elf && /usr/bin/cmake -E echo "Generated /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin" && /usr/bin/cmake -E md5sum /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin > /home/acnz/BM13XX_sim/build/bootloader/.bin_timestamp
   DESC = Generating binary image from built executable
   restat = 1
 
@@ -231,7 +231,7 @@ build CMakeFiles/app | ${cmake_ninja_workdir}CMakeFiles/app: phony || _project_e
 # Custom command for CMakeFiles/erase_flash
 
 build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;;/home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake
+  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;;/home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake
   pool = console
 
 
@@ -239,7 +239,7 @@ build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUS
 # Custom command for CMakeFiles/merge-bin
 
 build CMakeFiles/merge-bin | ${cmake_ninja_workdir}CMakeFiles/merge-bin: CUSTOM_COMMAND bootloader || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;;/home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=merge_bin;-o;/home/acnz/BM13XX_sim/build/bootloader/merged-binary.bin;@/home/acnz/BM13XX_sim/build/bootloader/flash_args" -D WORKING_DIRECTORY=/home/acnz/BM13XX_sim/build/bootloader -P run_serial_tool.cmake
+  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;;/home/acnz/esp/v5.4/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=merge_bin;-o;/home/acnz/BM13XX_sim/build/bootloader/merged-binary.bin;@/home/acnz/BM13XX_sim/build/bootloader/flash_args" -D WORKING_DIRECTORY=/home/acnz/BM13XX_sim/build/bootloader -P run_serial_tool.cmake
   pool = console
 
 
@@ -247,7 +247,7 @@ build CMakeFiles/merge-bin | ${cmake_ninja_workdir}CMakeFiles/merge-bin: CUSTOM_
 # Custom command for CMakeFiles/monitor
 
 build CMakeFiles/monitor | ${cmake_ninja_workdir}CMakeFiles/monitor: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a
-  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;-m;esp_idf_monitor" -D "SERIAL_TOOL_ARGS=--toolchain-prefix;xtensa-esp32-elf-;;--target;esp32;;--revision;0;;/home/acnz/BM13XX_sim/build/bootloader/bootloader.elf" -D WORKING_DIRECTORY=/home/acnz/BM13XX_sim/build/bootloader -P run_serial_tool.cmake
+  COMMAND = cd /home/acnz/esp/v5.4/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "SERIAL_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;-m;esp_idf_monitor" -D "SERIAL_TOOL_ARGS=--toolchain-prefix;xtensa-esp32-elf-;;--target;esp32;;--revision;0;;/home/acnz/BM13XX_sim/build/bootloader/bootloader.elf" -D WORKING_DIRECTORY=/home/acnz/BM13XX_sim/build/bootloader -P run_serial_tool.cmake
   pool = console
 
 
@@ -270,7 +270,7 @@ build project_elf_src_esp32.c | ${cmake_ninja_workdir}project_elf_src_esp32.c: C
 # Custom command for CMakeFiles/size
 
 build CMakeFiles/size | ${cmake_ninja_workdir}CMakeFiles/size: CUSTOM_COMMAND bootloader.map
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;-m;esp_idf_size" -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;-m;esp_idf_size" -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
   pool = console
 
 
@@ -278,7 +278,7 @@ build CMakeFiles/size | ${cmake_ninja_workdir}CMakeFiles/size: CUSTOM_COMMAND bo
 # Custom command for CMakeFiles/size-files
 
 build CMakeFiles/size-files | ${cmake_ninja_workdir}CMakeFiles/size-files: CUSTOM_COMMAND bootloader.map
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;-m;esp_idf_size" -D IDF_SIZE_MODE=--files -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;-m;esp_idf_size" -D IDF_SIZE_MODE=--files -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
   pool = console
 
 
@@ -286,7 +286,7 @@ build CMakeFiles/size-files | ${cmake_ninja_workdir}CMakeFiles/size-files: CUSTO
 # Custom command for CMakeFiles/size-components
 
 build CMakeFiles/size-components | ${cmake_ninja_workdir}CMakeFiles/size-components: CUSTOM_COMMAND bootloader.map
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;-m;esp_idf_size" -D IDF_SIZE_MODE=--archives -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D "IDF_SIZE_TOOL=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;-m;esp_idf_size" -D IDF_SIZE_MODE=--archives -D MAP_FILE=/home/acnz/BM13XX_sim/build/bootloader/bootloader.map -D OUTPUT_JSON= -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_size_tool.cmake
   pool = console
 
 
@@ -294,7 +294,7 @@ build CMakeFiles/size-components | ${cmake_ninja_workdir}CMakeFiles/size-compone
 # Custom command for CMakeFiles/uf2
 
 build CMakeFiles/uf2 | ${cmake_ninja_workdir}CMakeFiles/uf2: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "UF2_CMD=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;/home/acnz/esp/v5.4/esp-idf/tools/mkuf2.py;write;--chip;esp32" -D "UF2_ARGS=--json;/home/acnz/BM13XX_sim/build/bootloader/flasher_args.json;-o;/home/acnz/BM13XX_sim/build/bootloader/uf2.bin" -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_uf2_cmds.cmake
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "UF2_CMD=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;/home/acnz/esp/v5.4/esp-idf/tools/mkuf2.py;write;--chip;esp32" -D "UF2_ARGS=--json;/home/acnz/BM13XX_sim/build/bootloader/flasher_args.json;-o;/home/acnz/BM13XX_sim/build/bootloader/uf2.bin" -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_uf2_cmds.cmake
   pool = console
 
 
@@ -302,7 +302,7 @@ build CMakeFiles/uf2 | ${cmake_ninja_workdir}CMakeFiles/uf2: CUSTOM_COMMAND
 # Custom command for CMakeFiles/uf2-app
 
 build CMakeFiles/uf2-app | ${cmake_ninja_workdir}CMakeFiles/uf2-app: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "UF2_CMD=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3;/home/acnz/esp/v5.4/esp-idf/tools/mkuf2.py;write;--chip;esp32" -D "UF2_ARGS=--json;/home/acnz/BM13XX_sim/build/bootloader/flasher_args.json;-o;/home/acnz/BM13XX_sim/build/bootloader/uf2-app.bin;--bin;app" -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_uf2_cmds.cmake
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader && /usr/bin/cmake -D IDF_PATH=/home/acnz/esp/v5.4/esp-idf -D "UF2_CMD=/home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python;/home/acnz/esp/v5.4/esp-idf/tools/mkuf2.py;write;--chip;esp32" -D "UF2_ARGS=--json;/home/acnz/BM13XX_sim/build/bootloader/flasher_args.json;-o;/home/acnz/BM13XX_sim/build/bootloader/uf2-app.bin;--bin;app" -P /home/acnz/esp/v5.4/esp-idf/tools/cmake/run_uf2_cmds.cmake
   pool = console
 
 # =============================================================================
@@ -1548,7 +1548,7 @@ build esp-idf/efuse/rebuild_cache: phony esp-idf/efuse/CMakeFiles/rebuild_cache.
 # Custom command for esp-idf/efuse/CMakeFiles/efuse-common-table
 
 build esp-idf/efuse/CMakeFiles/efuse-common-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse-common-table: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192
 
 
 #############################################
@@ -1571,7 +1571,7 @@ build esp-idf/efuse/CMakeFiles/efuse_custom_table | ${cmake_ninja_workdir}esp-id
 # Custom command for esp-idf/efuse/CMakeFiles/show-efuse-table
 
 build esp-idf/efuse/CMakeFiles/show-efuse-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/show-efuse-table: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192 --info
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192 --info
 
 
 #############################################
@@ -1586,7 +1586,7 @@ build esp-idf/efuse/CMakeFiles/show_efuse_table | ${cmake_ninja_workdir}esp-idf/
 # Custom command for esp-idf/efuse/CMakeFiles/efuse_test_table
 
 build esp-idf/efuse/CMakeFiles/efuse_test_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse_test_table: CUSTOM_COMMAND
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32 --max_blk_len 192
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/efuse && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/components/efuse/efuse_table_gen.py /home/acnz/esp/v5.4/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32 --max_blk_len 192
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -2211,7 +2211,7 @@ build esp-idf/esptool_py/rebuild_cache: phony esp-idf/esptool_py/CMakeFiles/rebu
 # Custom command for esp-idf/esptool_py/CMakeFiles/bootloader_check_size
 
 build esp-idf/esptool_py/CMakeFiles/bootloader_check_size | ${cmake_ninja_workdir}esp-idf/esptool_py/CMakeFiles/bootloader_check_size: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/esptool_py && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python3 /home/acnz/esp/v5.4/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin
+  COMMAND = cd /home/acnz/BM13XX_sim/build/bootloader/esp-idf/esptool_py && /home/acnz/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/acnz/esp/v5.4/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/acnz/BM13XX_sim/build/bootloader/bootloader.bin
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
