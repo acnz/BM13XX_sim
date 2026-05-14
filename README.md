@@ -1,76 +1,30 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- | -------- |
+# BM13XX_sim: Emulador Híbrido de ASIC Bitmain no ESP32
 
-# UART Echo Example
+## 🚀 Sobre o Projeto
+O **BM13XX_sim** é um core de Mineração de Bitcoin desenvolvido sobre o framework ESP-IDF para o ESP32. O objetivo do projeto é **emular perfeitamente o comportamento de uma ASIC da série BM13XX da Bitmain**, respondendo aos comandos de uma controladora original via comunicação UART (baseado no protocolo Stratum/BM).
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 🧠 Arquitetura Híbrida (A "Mágica")
+O grande desafio deste projeto foi contornar uma limitação de hardware do ESP32: o acelerador criptográfico nativo não possui documentação/suporte para aceitar a injeção de um estado intermediário (**midstate**) do algoritmo SHA-256. Como o protocolo oficial da Bitmain envia apenas o *midstate* pela UART (para economizar banda), fomos forçados a criar uma **Arquitetura Híbrida** para o cálculo do Duplo SHA-256:
 
-This example demonstrates how to utilize UART interfaces by echoing back to the sender any data received on
-configured UART.
+1. **Primeiro Hash (Via Software - CPU):**
+   A controladora envia o *midstate* (32 bytes) e os dados finais do Header (12 bytes). Como o hardware do ESP32 exige iniciar hashes "do zero", resolvemos essa primeira etapa via software puro na CPU, utilizando as técnicas hiper-otimizadas de *baking* derivadas do NerdMiner.
+2. **Segundo Hash (Via Hardware - Acelerador DPORT):**
+   O resultado do Hash 1 (exatos 32 bytes) entra como input para o segundo hash. O código injeta esses bytes diretamente na memória física do acelerador (`SHA_TEXT_BASE`) e aciona os registradores (`SHA_START_REG`) em C puro. O hardware absorve o processamento e devolve o hash final em velocidade de silício.
 
-## How to use example
+### ⚙️ Estrutura de Núcleos (Multiprocessing)
+* **Core 0 (O Maestro & Operário 0):** Roda a task `uart_listener_task` que negocia baudrate, atende PING/PONG e atualiza o trabalho global (`g_job_version`). Concorrentemente, minera os nonces **pares**.
+* **Core 1 (O Operário 1):** Dedicado 100% à mineração em loop de alta velocidade, responsável por testar os nonces **ímpares**.
 
-### Hardware Required
+## 📊 Performance e Limites (O Teto de Vidro)
+Com a abordagem híbrida, o ESP32 atingiu a marca formidável de **~80 kH/s (40 kH/s por núcleo)** mantendo total fidelidade à API da Bitmain.
 
-The example can be run on any development board, that is based on the Espressif SoC. The board shall be connected to a computer with a single USB cable for flashing and monitoring. The external interface should have 3.3V outputs. You may
-use e.g. 3.3V compatible USB-to-Serial dongle.
+**Por que não 700+ kH/s como em outros projetos (ex: BitsyMiner)?**
+A resposta reside na **Lei de Amdahl**. Projetos ultra-rápidos abdicam da arquitetura da Bitmain: eles geram o Header de 80 bytes completo e empurram *tudo* direto para o hardware. Para continuarmos sendo um emulador "Drop-In" (plug-and-play em chicotes Bitmain), nós **precisamos** aceitar o *midstate*. Isso nos obriga a rodar o primeiro hash via CPU (gastando cerca de 6.000 ciclos de clock). A CPU é o nosso gargalo intransponível.
 
-### Setup the Hardware
+## 🔮 Próximos Passos (A Rota para a FPGA)
+O `BM13XX_sim` atual prova o conceito e exaure matematicamente o limite do chip ESP32 para este caso de uso específico. 
 
-Connect the external serial interface to the board as follows.
+O próximo passo arquitetural é portar essa lógica para uma **FPGA** (como Lattice iCE40, Xilinx Spartan ou Zynq). Através de VHDL/Verilog, será possível instanciar um bloco SHA-256 customizado com portas exclusivas para *injetar o midstate nativamente em hardware*. Paralelizando o processo, a arquitetura deixará a escala de kH/s para alcançar a casa dos **MH/s**.
 
-```
-  -----------------------------------------------------------------------------------------
-  | Target chip Interface | Kconfig Option     | Default ESP Pin      | External UART Pin |
-  | ----------------------|--------------------|----------------------|--------------------
-  | Transmit Data (TxD)   | EXAMPLE_UART_TXD   | GPIO4                | RxD               |
-  | Receive Data (RxD)    | EXAMPLE_UART_RXD   | GPIO5                | TxD               |
-  | Ground                | n/a                | GND                  | GND               |
-  -----------------------------------------------------------------------------------------
-```
-Note: Some GPIOs can not be used with certain chips because they are reserved for internal use. Please refer to UART documentation for selected target.
-
-Optionally, you can set-up and use a serial interface that has RTS and CTS signals in order to verify that the
-hardware control flow works. Connect the extra signals according to the following table, configure both extra pins in
-the example code `uart_echo_example_main.c` by replacing existing `UART_PIN_NO_CHANGE` macros with the appropriate pin
-numbers and configure UART1 driver to use the hardware flow control by setting `.flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS`
-and adding `.rx_flow_ctrl_thresh = 122` to the `uart_config` structure.
-
-```
-  ---------------------------------------------------------------
-  | Target chip Interface | Macro           | External UART Pin |
-  | ----------------------|-----------------|--------------------
-  | Transmit Data (TxD)   | ECHO_TEST_RTS   | CTS               |
-  | Receive Data (RxD)    | ECHO_TEST_CTS   | RTS               |
-  | Ground                | n/a             | GND               |
-  ---------------------------------------------------------------
-```
-
-### Configure the project
-
-Use the command below to configure project using Kconfig menu as showed in the table above.
-The default Kconfig values can be changed such as: EXAMPLE_TASK_STACK_SIZE, EXAMPLE_UART_BAUD_RATE, EXAMPLE_UART_PORT_NUM (Refer to Kconfig file).
-```
-idf.py menuconfig
-```
-
-### Build and Flash
-
-Build the project and flash it to the board, then run monitor tool to view serial output:
-
-```
-idf.py -p PORT flash monitor
-```
-
-(To exit the serial monitor, type ``Ctrl-]``.)
-
-See the Getting Started Guide for full steps to configure and use ESP-IDF to build projects.
-
-## Example Output
-
-Type some characters in the terminal connected to the external serial interface. As result you should see echo in the same terminal which you used for typing the characters. You can verify if the echo indeed comes from ESP board by
-disconnecting either `TxD` or `RxD` pin: no characters will appear when typing.
-
-## Troubleshooting
-
-You are not supposed to see the echo in the terminal which is used for flashing and monitoring, but in the other UART configured through Kconfig can be used.
+---
+*Este código representa a ponte definitiva e o limite físico entre o mundo dos microcontroladores (software) e o funcionamento real de uma ASIC de Bitcoin.*

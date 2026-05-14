@@ -96,7 +96,7 @@ bool second_hash_hardware(uint32_t* first_hash_32bytes) {
     *(volatile uint32_t *)(SHA_LOAD_REG) = 1;
     while (*(volatile uint32_t *)(SHA_BUSY_REG) != 0);
 
-    if ((sha_text[7] & 0xFFFF) == 0) {
+    if ((sha_text[7] & 0xFFFFFF) == 0) {
         return true;
     }
     return false;
