@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "bm13xx_sim",
-    "project_version":    "cf50b35-dirty",
+    "project_version":    "1a6bf14-dirty",
     "project_path":       "/home/acnz/BM13XX_sim",
     "idf_path":           "/home/acnz/esp/v5.4/esp-idf",
     "build_dir":          "/home/acnz/BM13XX_sim/build",

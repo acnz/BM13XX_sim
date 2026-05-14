@@ -7,14 +7,21 @@
 #include "driver/uart.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
-#include "mbedtls/sha256.h"
+#include "soc/hwcrypto_reg.h"
+#include "soc/dport_reg.h"
+
+// Endereços físicos do módulo SHA no ESP32 padrão (não-C3) definidos no BitsyMiner
+#define SHA_TEXT_BASE    0x3FF03000
+#define SHA_START_REG    0x3FF03090
+#define SHA_LOAD_REG     0x3FF03098
+#define SHA_BUSY_REG     0x3FF0309C
 
 #define SIM_TXD_PIN CONFIG_UART_TXD
 #define SIM_RXD_PIN CONFIG_UART_RXD
 #define SIM_UART_PORT CONFIG_UART_PORT_NUM
 #define BUF_SIZE 1024
 
-static const char *TAG = "BM13XX_sim_dual";
+static const char *TAG = "BM13XX_hwSHA256";
 
 // Mutex para evitar que os dois núcleos tentem escrever na Serial ao mesmo tempo
 static SemaphoreHandle_t uart_mutex;
@@ -51,6 +58,49 @@ static const uint32_t K[64] = {
 #define F1(x, y, z) (z ^ (x & (y ^ z)))
 #define R(t) (W[t] = S1(W[t - 2]) + W[t - 7] + S0(W[t - 15]) + W[t - 16])
 #define P(a, b, c, d, e, f, g, h, x, K) { temp1 = h + S3(e) + F1(e, f, g) + K + x; temp2 = S2(a) + F0(a, b, c); d += temp1; h = temp1 + temp2; }
+
+// Função para ligar o módulo SHA (Baseado na macro INIT_HARDWARE_SHA256 do miner.h)
+void init_hardware_sha() {
+    DPORT_REG_SET_BIT(DPORT_PERI_CLK_EN_REG, DPORT_PERI_EN_SHA);
+    DPORT_REG_CLR_BIT(DPORT_PERI_RST_EN_REG, DPORT_PERI_EN_SHA | DPORT_PERI_EN_SECUREBOOT);
+}
+
+// Função que executa EXCLUSIVAMENTE o segundo hash no hardware
+bool second_hash_hardware(uint32_t* first_hash_32bytes) {
+    volatile uint32_t *sha_text = (volatile uint32_t*) SHA_TEXT_BASE;
+
+    // 1. Espera o hardware ficar ocioso
+    while (*(volatile uint32_t *)(SHA_BUSY_REG) != 0);
+
+    // 2. Escreve os 32 bytes do primeiro hash no hardware
+    for(int i = 0; i < 8; i++) {
+        sha_text[i] = first_hash_32bytes[i];
+    }
+
+    // 3. O algoritmo SHA256 exige um padding no final da mensagem.
+    // Como a mensagem tem exatamente 32 bytes (256 bits), o padding é previsível:
+    // Um bit '1' (0x80000000), seguido de zeros, e o tamanho da mensagem (256 bits = 0x00000100) no final.
+    sha_text[8] = 0x80000000;
+    for(int i = 9; i < 15; i++) {
+        sha_text[i] = 0;
+    }
+    sha_text[15] = 0x00000100; // Tamanho em bits (256)
+
+    // 4. Inicia a operação SHA256 do ZERO (START)
+    *(volatile uint32_t *)(SHA_START_REG) = 1;
+
+    // 5. Espera o cálculo terminar
+    while (*(volatile uint32_t *)(SHA_BUSY_REG) != 0);
+
+    // 6. Manda o hardware carregar o resultado de volta para os registradores TEXT
+    *(volatile uint32_t *)(SHA_LOAD_REG) = 1;
+    while (*(volatile uint32_t *)(SHA_BUSY_REG) != 0);
+
+    if ((sha_text[7] & 0xFFFF) == 0) {
+        return true;
+    }
+    return false;
+}
 
 void nerd_sha256_bake(const uint32_t* digest, const uint8_t* dataIn, uint32_t* bake) {
     bake[0] = GET_UINT32_BE(dataIn, 0); bake[1] = GET_UINT32_BE(dataIn, 4); bake[2] = GET_UINT32_BE(dataIn, 8);
@@ -116,44 +166,24 @@ bool nerd_sha256d_baked(const uint32_t* digest, const uint8_t* dataIn, const uin
     }
     
     // ============================================
-    // 2º SHA-256
+    // 2º SHA-256 VIA ACELERADOR DE HARDWARE
     // ============================================
-    W[0] = A[0] + digest[0]; W[1] = A[1] + digest[1]; W[2] = A[2] + digest[2]; W[3] = A[3] + digest[3];
-    W[4] = A[4] + digest[4]; W[5] = A[5] + digest[5]; W[6] = A[6] + digest[6]; W[7] = A[7] + digest[7];
-    W[8] = 0x80000000;
-    for(int i=9; i<15; i++) W[i] = 0;
-    W[15] = 256;
     
-    for(int i=16; i<64; i++) {
-        W[i] = S1(W[i - 2]) + W[i - 7] + S0(W[i - 15]) + W[i - 16];
-    }
-    
-    A[0] = 0x6A09E667; A[1] = 0xBB67AE85; A[2] = 0x3C6EF372; A[3] = 0xA54FF53A;
-    A[4] = 0x510E527F; A[5] = 0x9B05688C; A[6] = 0x1F83D9AB; A[7] = 0x5BE0CD19;
-    
-    // Rodadas 0 a 55 em blocos de 8
-    for(int i=0; i<56; i+=8) {
-        P(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], W[i+0], K[i+0]);
-        P(A[7], A[0], A[1], A[2], A[3], A[4], A[5], A[6], W[i+1], K[i+1]);
-        P(A[6], A[7], A[0], A[1], A[2], A[3], A[4], A[5], W[i+2], K[i+2]);
-        P(A[5], A[6], A[7], A[0], A[1], A[2], A[3], A[4], W[i+3], K[i+3]);
-        P(A[4], A[5], A[6], A[7], A[0], A[1], A[2], A[3], W[i+4], K[i+4]);
-        P(A[3], A[4], A[5], A[6], A[7], A[0], A[1], A[2], W[i+5], K[i+5]);
-        P(A[2], A[3], A[4], A[5], A[6], A[7], A[0], A[1], W[i+6], K[i+6]);
-        P(A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[0], W[i+7], K[i+7]);
-    }
-    
-    // Rodadas finais 56 a 59
-    P(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], W[56], K[56]);
-    P(A[7], A[0], A[1], A[2], A[3], A[4], A[5], A[6], W[57], K[57]);
-    P(A[6], A[7], A[0], A[1], A[2], A[3], A[4], A[5], W[58], K[58]);
-    P(A[5], A[6], A[7], A[0], A[1], A[2], A[3], A[4], W[59], K[59]);
-    
-    // O VERDADEIRO EARLY EXIT NA RODADA 60 DO SEGUNDO HASH!
-    temp1 = A[3] + S3(A[0]) + F1(A[0], A[1], A[2]) + K[60] + W[60];
-    if ((uint32_t)((A[7] + temp1) & 0xFFFF) != 0x32E7) return false;
-    
-    return true;
+    // 1. Preparamos o input isolando os 32 bytes do resultado do 1º Hash
+    uint32_t first_hash[8];
+    first_hash[0] = A[0] + digest[0];
+    first_hash[1] = A[1] + digest[1];
+    first_hash[2] = A[2] + digest[2];
+    first_hash[3] = A[3] + digest[3];
+    first_hash[4] = A[4] + digest[4];
+    first_hash[5] = A[5] + digest[5];
+    first_hash[6] = A[6] + digest[6];
+    first_hash[7] = A[7] + digest[7];
+
+    // 3. Deixamos o hardware fritar os dados e Checagem de Dificuldade da ASIC (16 zeros)
+    // Importante: No caso de hashes raríssimos muito difíceis, a Bitmain exige
+    // verificações extras. Mas para o `send_bitmain_response`, basta os 32 bits zerados.
+    return second_hash_hardware(first_hash);
 }
 
 // ============================================================================
@@ -249,7 +279,7 @@ static void uart_listener_task(void *arg) {
     ESP_ERROR_CHECK(uart_driver_install(SIM_UART_PORT, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0));
 
     uint8_t *data = (uint8_t *)malloc(BUF_SIZE);
-    ESP_LOGI(TAG, "Músculo S3 Dual-Core Iniciado. Aguardando Maestro C3...");
+    ESP_LOGI(TAG, "Músculo Dual-Core Iniciado. Aguardando Work...");
 
     while (1) {
         int len = uart_read_bytes(SIM_UART_PORT, data, 128, 20 / portTICK_PERIOD_MS);
@@ -288,7 +318,7 @@ void app_main(void) {
 
     // Cria o Maestro (Fica ouvindo a UART no Core 0, consome quase nada)
     xTaskCreatePinnedToCore(uart_listener_task, "uart_task", 8192, NULL, 5, NULL, 1);
-
+    init_hardware_sha();
     // Cria os DOIS OPERÁRIOS (O Músculo Real), pregando um em cada núcleo
     xTaskCreatePinnedToCore(miner_task, "miner_core0", 8192, (void*)0, 10, NULL, 0);
     xTaskCreatePinnedToCore(miner_task, "miner_core1", 8192, (void*)1, 10, NULL, 1);
